@@ -227,7 +227,7 @@ app.put('/updateWorkPlace', async (req, res) => {
 
 app.post('/enter-grafik', async (req, res) => {
     try {
-        const { placowka, date, grafikOpcji, grafik } = req.body;
+        const { placowka, date, grafikOpcji, grafik, grafikColours } = req.body;
 
         // Check if there is an existing Grafik with the same name and date
         const existingGrafik = await Grafik.findOne({ placowka, date });
@@ -243,6 +243,7 @@ app.post('/enter-grafik', async (req, res) => {
             date,
             grafikOpcji,
             grafik,
+            grafikColours
         });
 
         // Save the new Grafik document to the database
@@ -302,7 +303,7 @@ app.get('/getNumbers', async (req, res) => {
 });
 
 app.put('/update-grafik', async (req, res) => {
-    const { placowka, date, grafikOpcji, grafik } = req.body;
+    const { placowka, date, grafikOpcji, grafik, grafikColours } = req.body;
 
     console.log(grafik)
     try {
@@ -316,6 +317,7 @@ app.put('/update-grafik', async (req, res) => {
 
         // Update the fields with the new values
         existingGrafik.grafikOpcji = grafikOpcji;
+        existingGrafik.grafikColours = grafikColours;
         existingGrafik.grafik = grafik;
 
         // Save the updated document to the database
